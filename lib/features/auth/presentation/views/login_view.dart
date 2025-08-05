@@ -24,6 +24,14 @@ class _LoginViewState extends State<LoginView> {
     _passwordController.dispose();
     super.dispose();
   }
+  void _handleLogin() {
+    if (_formKey.currentState!.validate()) {
+      final email = _emailController.text.trim();
+      final password = _passwordController.text;
+
+      context.read<LoginCubit>().login(email, password);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -231,12 +239,5 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  void _handleLogin() {
-    if (_formKey.currentState!.validate()) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
 
-      context.read<LoginCubit>().login(email, password);
-    }
-  }
 }
